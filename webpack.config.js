@@ -59,21 +59,6 @@ const fileName = (ext) => {
   }
 }
 
-const cssLoader = (extra) => {
-  const loaders = [
-    {
-      loader: MiniCssExtractPlugin.loader
-    },
-    "css-loader"
-  ];
-
-  if (extra) {
-    loaders.push(extra);
-  }
-
-  return loaders;
-}
-
 const babelOptions = (option) => {
   const options = {
     presets: ["@babel/preset-env"]
