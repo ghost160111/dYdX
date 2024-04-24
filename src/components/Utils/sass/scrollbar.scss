@@ -1,0 +1,13 @@
+.scrollbar {
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: rem(8);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scroll);
+    border-radius: rem(4);
+  }
+}

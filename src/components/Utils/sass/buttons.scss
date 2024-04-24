@@ -1,0 +1,108 @@
+.dydx-btn,
+a.dydx-btn,
+button.dydx-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: rem(16);
+  font-family: var(--font-nunito);
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--white);
+
+  min-width: rem(180);
+  max-width: rem(250);
+  min-height: rem(48);
+  max-height: rem(48);
+
+  background-color: var(--bg-secondary);
+  border: none;
+  border-radius: rem(8);
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--bg-secondary-hover);
+  }
+
+  &:active {
+    opacity: 0.75;
+  }
+
+  &::before,
+  &::after {
+    content: ".";
+    font-size: 0;
+    display: inline-block;
+
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+
+    width: rem(16);
+    height: rem(16);
+  }
+
+  &--original-width {
+    min-width: auto;
+    max-width: fit-content;
+  }
+
+  &--transparent {
+    background: transparent;
+  }
+
+  &--full-width {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  &--accent-brand {
+    background-color: var(--accent-brand);
+
+    &:hover {
+      background-color: var(--accent-brand-hover);
+    }
+  }
+
+  &--accent-white {
+    color: var(--accent-brand);
+    background-color: var(--white);
+
+    &:hover {
+      color: var(--white);
+      background-color: var(--bg-secondary-hover);
+    }
+  }
+
+  &--arrow-right-before-white {
+    &::before {
+      background-image: url("@/assets/images/arrow-right.svg");
+      margin-right: rem(8);
+    }
+  }
+
+  &--arrow-right-after-white {
+    &::after {
+      background-image: url("@/assets/images/arrow-right.svg");
+      margin-left: rem(10);
+    }
+  }
+
+  &--arrow-right-before-pink {
+    &::before {
+      background-image: url("@/assets/images/arrow-right-pink.svg");
+      margin-right: rem(8);
+    }
+  }
+
+  &--arrow-right-after-pink {
+    &::after {
+      background-image: url("@/assets/images/arrow-right-pink.svg");
+      margin-left: rem(10);
+    }
+  }
+}

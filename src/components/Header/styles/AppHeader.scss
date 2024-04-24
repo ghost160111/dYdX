@@ -1,0 +1,48 @@
+@import "../../Utils/sass/iterate-margins.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:host {
+  min-width: 100%;
+}
+
+.header {
+  display: block;
+  min-width: 100%;
+  min-height: rem(72);
+  max-height: rem(72);
+
+  background: transparent;
+  transition: background-color 0.3s ease;
+
+  &--scrolled {
+    background: #171720;
+    border-bottom: rem(1) solid rgba(white, 0.1);
+  }
+}
+
+.header-wrapper {
+  padding-left: rem(32);
+  padding-right: rem(32);
+
+  @media screen and (max-width: 639px) {
+    padding-left: rem(8);
+    padding-right: rem(8);
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-width: 100%;
+}
+
+header-navigation {
+  font-family: var(--font-space-mono);
+}

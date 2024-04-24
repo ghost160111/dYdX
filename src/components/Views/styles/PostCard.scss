@@ -1,0 +1,58 @@
+@import "../../Utils/sass/functions.scss";
+@import "../../Utils/sass/fonts.scss";
+
+.container {
+  position: relative;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  min-width: rem(390);
+  max-width: rem(390);
+  min-height: rem(560);
+  max-height: rem(560);
+
+  transition: all 0.3s ease;
+  background: var(--bg-secondary);
+  color: var(--white);
+
+  border: none;
+  border-radius: rem(16);
+
+  &:hover {
+    & > .container-wrapper {
+      transform: translate(0, rem(180));
+    }
+
+    & > .hidden-container {
+      transform: translate(0, 0);
+    }
+  }
+}
+
+.hidden-container {
+  position: absolute;
+  transform: translate(0, rem(-220));
+  transition: all 0.3s ease;
+  background-color: #232334;
+
+  display: block;
+  width: 100%;
+  height: rem(180);
+
+  border-top-left-radius: rem(16);
+  border-top-right-radius: rem(16);
+}
+
+.container-wrapper {
+  transition: all 0.3s ease;
+  padding: rem(24);
+}
+
+.container__fund-type,
+.container__funding-amount {
+  color: var(--ti-tertiary);
+}
+

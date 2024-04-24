@@ -1,0 +1,14 @@
+.scrollbar {
+  scroll-behavior: smooth;
+  z-index: 100000;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: rem(8);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--accent-brand);
+    border-radius: rem(4);
+  }
+}

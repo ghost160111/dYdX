@@ -1,0 +1,45 @@
+@import "../../Utils/sass/functions.scss";
+
+:host {
+  position: fixed;
+  left: 98%;
+  top: 98%;
+  transform: translate(-98%, -98%);
+
+  width: rem(50);
+  height: rem(50);
+
+  z-index: 10000000;
+}
+
+.scroll-to-top-btn {
+  font-size: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  background-color: var(--accent-brand);
+  background-image: url("@/assets/images/arrow-right.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+
+  border: none;
+  border-radius: 50%;
+
+  width: rem(50);
+  height: rem(50);
+
+  transform: rotate(-90deg) scale(1);
+
+  &:hover {
+    background-color: var(--accent-brand-hover);
+  }
+
+  &:active {
+    transition: all 100ms ease-out;
+    transform: rotate(-90deg) scale(0.75);
+  }
+
+  &--hidden {
+    transform: rotate(-90deg) scale(0);
+  }
+}

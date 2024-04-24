@@ -1,0 +1,63 @@
+@import "../../Utils/sass/functions.scss";
+@import "../../Utils/sass/buttons.scss";
+@import "../../Utils/sass/iterate-margins.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:host {
+  min-width: 100%;
+  min-height: rem(248);
+}
+
+.container {
+  position: relative;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+
+  min-height: rem(248);
+  max-width: rem(1225);
+
+  background: linear-gradient(var(--gradient-brand));
+
+  border: none;
+  border-radius: rem(32);
+
+  @media screen and (max-width: 639px) {
+    min-height: rem(350);
+  }
+}
+
+.container__paragraph-large,
+.container__heading-large {
+  text-align: center;
+}
+
+.container__paragraph-large {
+  font-size: rem(18);
+  line-height: rem(24);
+  padding-top: rem(40);
+}
+
+.container__heading-large {
+  font-size: rem(40);
+  line-height: rem(48);
+}
+
+.container__apply-for-grants-link {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-weight: bold !important;
+
+  &:hover {
+    &::after {
+      background-image: url("@/assets/images/arrow-right.svg");
+      color: var(--white);
+    }
+  }
+}

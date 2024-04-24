@@ -1,0 +1,55 @@
+@import "../../Utils/sass/functions.scss";
+@import "../../Utils/sass/fonts.scss";
+
+.ref {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  margin-top: rem(24);
+}
+
+.ref__title,
+.ref__description {
+  text-align: center;
+}
+
+.ref__title {
+  position: relative;
+  margin-top: rem(24);
+  margin-bottom: 0;
+}
+
+.ref__description {
+  color: var(--ti-secondary);
+  padding: 0 calc(50% - rem(375));
+}
+
+.ref__link {
+  text-decoration: none;
+  color: var(--accent-brand);
+  transition: all 0.3s ease;
+
+  &::after {
+    display: inline-block;
+    content: ".";
+    font-size: 0;
+
+    background-image: url("@/assets/images/arrow-right-pink.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    width: rem(16);
+    height: rem(16);
+
+    margin-left: rem(4);
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+}

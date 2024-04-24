@@ -1,0 +1,31 @@
+$accent-brand: #6966FF;
+$accent-brand-hover: #6C83FF;
+$accent-red: #E45555;
+$accent-green: #16B57F;
+$bg-primary: #1C1C28;
+$bg-secondary: #393953;
+$bg-secondary-hover: #4F4C64;
+$gradient-brand: 129deg, #5d5bf9, #7588f3 36%;
+$gradient-grey: #2C2C3D #1A1A27;
+$ti-primary: #FFFFFF;
+$ti-secondary: #C8C7D8;
+$ti-tertiary: #A59EBA;
+$border-gradient: #FFFFFF #FFFFFF 0%;
+$border-hover: #393953;
+
+:root {
+  --accent-brand: #{$accent-brand};
+  --accent-brand-hover: #{$accent-brand-hover};
+  --accent-red: #{$accent-red};
+  --accent-green: #{$accent-green};
+  --bg-primary: #{$bg-primary};
+  --bg-secondary: #{$bg-secondary};
+  --bg-secondary-hover: #{$bg-secondary-hover};
+  --gradient-brand: #{$gradient-brand};
+  --gradient-grey: #{$gradient-grey};
+  --ti-primary: #{$ti-primary};
+  --ti-secondary: #{$ti-secondary};
+  --ti-tertiary: #{$ti-tertiary};
+  --border-gradient: #{$border-gradient};
+  --border-hover: #{$border-hover};
+}

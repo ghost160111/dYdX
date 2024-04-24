@@ -1,0 +1,66 @@
+@import "../../Utils/sass/functions.scss";
+
+:host {
+  position: relative;
+}
+
+.slider-container {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding: rem(32);
+  padding-top: 0;
+  margin-top: rem(calc(16 * 8));
+  gap: rem(32);
+  width: 94.5%;
+  height: rem(560);
+
+  overflow-x: hidden;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+
+  @media screen and (max-width: 639px) {
+    padding: rem(8);
+    padding-right: 0;
+  }
+}
+
+.slide-btn {
+  position: absolute;
+  left: 98%;
+  top: 50%;
+  transform: translate(-98%, -50%);
+
+  display: block;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  border: none;
+  border-radius: 50%;
+
+  min-width: rem(48);
+  min-height: rem(48);
+  max-width: rem(48);
+  max-height: rem(48);
+
+  &:hover {
+    transform: translate(-98%, -50%) scale(1.25);
+  }
+
+  &:active {
+    transform: translate(-98%, -50%) scale(1);
+  }
+
+  &::after {
+    content: url("@/assets/images/arrow-right-pink.svg");
+    font-size: 0;
+  }
+
+  @media screen and (max-width: 639px) {
+    &:focus {
+      transform: translate(-98%, -50%) scale(1.25);
+    }
+  }
+}

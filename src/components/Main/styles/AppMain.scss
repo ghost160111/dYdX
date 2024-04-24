@@ -1,0 +1,11 @@
+@import "../../Utils/sass/functions.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:host {
+  min-width: 100%;
+}

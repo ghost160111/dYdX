@@ -1,0 +1,168 @@
+@import "../../Utils/sass/functions.scss";
+@import "../../Utils/sass/buttons.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: rem(32);
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  list-style: none;
+  gap: rem(16);
+
+  min-height: rem(48);
+  max-height: rem(48);
+
+  transition: all 0.3s ease;
+
+  & > li {
+    min-height: rem(48);
+    max-height: rem(48);
+
+    &.socials {
+      display: none;
+
+      @media screen and (max-width: 900px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: rem(90);
+        padding-top: rem(64);
+      }
+    }
+
+    &.apply-link {
+      @media screen and (max-width: 900px) {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 100dvh;
+    max-height: 100dvh;
+
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--bg-secondary);
+
+    transform: scale(2);
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @media screen and (max-width: 639px) {
+    transform: scale(1.25);
+  }
+
+  @media screen and (max-width: 400px) {
+    transform: scale(1);
+  }
+}
+
+.nav-list__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--ti-secondary);
+  text-decoration: none;
+  transition: background-color, color, 0.3s ease;
+
+  min-height: rem(48);
+  max-height: rem(48);
+
+  padding-left: rem(16);
+  padding-right: rem(16);
+
+  border-radius: rem(8);
+
+  &:hover {
+    background: var(--bg-secondary);
+  }
+
+  &:active {
+    background: none;
+    color: var(--white);
+  }
+
+  &--active {
+    color: var(--accent-brand);
+
+    &.dydx-btn.dydx-btn--accent-brand {
+      background: var(--white);
+      color: var(--accent-brand);
+    }
+  }
+}
+
+.menu-toggle-btn {
+  display: block;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+
+  width: rem(40);
+  height: rem(40);
+
+  background: transparent;
+  background-image: url("~@/assets/images/burger.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  &--active {
+    background-image: url("@/assets/images/cancel.svg");
+  }
+
+  @media screen and (max-width: 900px) {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+  }
+}
+
+#apply-ref {
+  display: none;
+
+  @media screen and (max-width: 900px) {
+    display: flex;
+    z-index: 1000;
+  }
+}

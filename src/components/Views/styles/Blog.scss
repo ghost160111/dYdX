@@ -1,0 +1,38 @@
+@import "../../Utils/sass/functions.scss";
+@import "../../Utils/sass/fonts.scss";
+
+.container {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  min-width: rem(392);
+  max-width: rem(392);
+  min-height: rem(440);
+  max-height: rem(440);
+
+  border: none;
+  border-radius: rem(16);
+
+  background: var(--bg-secondary);
+}
+
+.container__content {
+  padding: rem(24);
+}
+
+.content__type,
+.content__posted-date {
+  color: var(--ti-secondary);
+}
+
+.container__img {
+  width: 100%;
+  height: auto;
+
+  & > img {
+    width: 100%;
+    height: auto;
+  }
+}
