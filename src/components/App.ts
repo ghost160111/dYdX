@@ -1,7 +1,7 @@
 import ReactiveApp from "../plugins/ReactiveElement/App/ReactiveApp";
-import AppFooter from "./Footer/AppFooter";
-import AppHeader from "./Header/AppHeader";
-import AppMain from "./Main/AppMain";
+import AppFooter from "./Layout/Footer/AppFooter";
+import AppHeader from "./Layout/Header/AppHeader";
+import AppMain from "./Layout/Main/AppMain";
 import ScrollTop from "./Global/ScrollTop";
 
 export default class Main {

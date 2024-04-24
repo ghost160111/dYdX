@@ -1,18 +1,18 @@
 // @ts-ignore
 import sass from "!css-loader!sass-loader!../styles/HeaderNavigation.scss";
-import { ReactiveElement } from "../../../plugins/ReactiveElement/ReactiveElementLib";
-import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineComponent";
-import { Route, Routes } from "../../../plugins/ReactiveElement/Interfaces/IRoutes";
-import ApplyForGrants from "../../Views/ApplyForGrant";
-import BlogView from "../../Views/BlogView";
-import BrandAssets from "../../Views/BrandAssets";
-import DiscoverInitiatives from "../../Views/DiscoverInitiatives";
-import FAQView from "../../Views/FAQ";
-import FundedGrants from "../../Views/FundedGrants";
-import HomeView from "../../Views/Home";
-import ProgramExpenses from "../../Views/ProgramExpenses";
-import Error404 from "../../Views/Error404";
-import SocialLinks from "../../Global/SocialLinks";
+import { ReactiveElement } from "../../../../plugins/ReactiveElement/ReactiveElementLib";
+import DefineComponent from "../../../../plugins/ReactiveElement/Decorators/DefineComponent";
+import { Route, Routes } from "../../../../plugins/ReactiveElement/Interfaces/IRoutes";
+import ApplyForGrants from "../../../Views/ApplyForGrant";
+import BlogView from "../../../Views/BlogView";
+import BrandAssets from "../../../Views/BrandAssets";
+import DiscoverInitiatives from "../../../Views/DiscoverInitiatives";
+import FAQView from "../../../Views/FAQ";
+import FundedGrants from "../../../Views/FundedGrants";
+import HomeView from "../../../Views/Home";
+import ProgramExpenses from "../../../Views/ProgramExpenses";
+import Error404 from "../../../Views/Error404";
+import SocialLinks from "../../../Global/SocialLinks";
 
 @DefineComponent({
   tag: "header-navigation",

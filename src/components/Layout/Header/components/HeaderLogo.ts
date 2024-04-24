@@ -2,8 +2,8 @@
 import sass from "!css-loader!sass-loader!../styles/HeaderLogo.scss";
 // @ts-ignore
 import LogoSvg from "@/assets/images/Logo.svg";
-import { ReactiveElement } from "../../../plugins/ReactiveElement/ReactiveElementLib";
-import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineComponent";
+import { ReactiveElement } from "../../../../plugins/ReactiveElement/ReactiveElementLib";
+import DefineComponent from "../../../../plugins/ReactiveElement/Decorators/DefineComponent";
 
 @DefineComponent({
   tag: "header-logo",

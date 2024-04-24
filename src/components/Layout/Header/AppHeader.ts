@@ -1,7 +1,7 @@
 // @ts-ignore
 import sass from "!css-loader!sass-loader!./styles/AppHeader.scss";
-import { ReactiveElement } from "../../plugins/ReactiveElement/ReactiveElementLib";
-import DefineComponent from "../../plugins/ReactiveElement/Decorators/DefineComponent";
+import { ReactiveElement } from "../../../plugins/ReactiveElement/ReactiveElementLib";
+import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineComponent";
 import HeaderLogo from "./components/HeaderLogo";
 import HeaderNavigation from "./components/HeaderNavigation";
 

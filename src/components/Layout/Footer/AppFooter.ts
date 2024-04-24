@@ -1,11 +1,11 @@
 // @ts-ignore
 import sass from "!css-loader!sass-loader!./styles/AppFooter.scss";
-import { ReactiveElement } from "../../plugins/ReactiveElement/ReactiveElementLib";
-import DefineComponent from "../../plugins/ReactiveElement/Decorators/DefineComponent";
+import { ReactiveElement } from "../../../plugins/ReactiveElement/ReactiveElementLib";
+import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineComponent";
 // @ts-ignore
 import FooterLogo from "@/assets/images/FooterLogo.svg";
 import FooterApplyGrant from "./components/FooterApplyGrant";
-import SocialLinks from "../Global/SocialLinks";
+import SocialLinks from "../../Global/SocialLinks";
 
 @DefineComponent({
   tag: "app-footer",
