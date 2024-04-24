@@ -1,4 +1,4 @@
-import Base from "../Base/Base";
+import Base from "./Base";
 
 export default class FadeTransition extends Base {
   constructor(targetNode: Node, duration?: number) {

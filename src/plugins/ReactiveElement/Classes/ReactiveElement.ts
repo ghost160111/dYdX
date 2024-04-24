@@ -1,4 +1,4 @@
-import FadeTransition from "../../FadeTransition/FadeTransition";
+import FadeTransition from "./FadeTransition";
 import PopupContentHandler from "../Components/PopupContentHandler";
 import {
   BaseHandler,

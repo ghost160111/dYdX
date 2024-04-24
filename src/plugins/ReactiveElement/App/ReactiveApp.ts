@@ -1,4 +1,4 @@
-import FadeTransition from "../../FadeTransition/FadeTransition";
+import FadeTransition from "../Classes/FadeTransition";
 import { ReactiveElement } from "../ReactiveElementLib";
 
 const Errors = {
