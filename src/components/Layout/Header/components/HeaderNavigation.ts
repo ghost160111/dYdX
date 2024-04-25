@@ -2,17 +2,12 @@
 import sass from "!css-loader!sass-loader!../styles/HeaderNavigation.scss";
 import { ReactiveElement } from "../../../../plugins/ReactiveElement/ReactiveElementLib";
 import DefineComponent from "../../../../plugins/ReactiveElement/Decorators/DefineComponent";
-import { Route, Routes } from "../../../../plugins/ReactiveElement/Interfaces/IRoutes";
-import ApplyForGrants from "../../../Views/ApplyForGrant";
-import BlogView from "../../../Views/BlogView";
-import BrandAssets from "../../../Views/BrandAssets";
-import DiscoverInitiatives from "../../../Views/DiscoverInitiatives";
-import FAQView from "../../../Views/FAQ";
-import FundedGrants from "../../../Views/FundedGrants";
-import HomeView from "../../../Views/Home";
-import ProgramExpenses from "../../../Views/ProgramExpenses";
-import Error404 from "../../../Views/Error404";
 import SocialLinks from "../../../Global/SocialLinks";
+import routes from "./Routes";
+import { Route, Routes } from "../../../../plugins/ReactiveElement/Interfaces/IRoutes";
+
+export interface HeaderNavigationProps {
+}
 
 @DefineComponent({
   tag: "header-navigation",
@@ -37,7 +32,7 @@ import SocialLinks from "../../../Global/SocialLinks";
   `
 })
 export default class HeaderNavigation extends ReactiveElement {
-  constructor() {
+  constructor(props?: HeaderNavigationProps) {
     super({
       shadowDOM: true,
       animations: {
@@ -45,7 +40,8 @@ export default class HeaderNavigation extends ReactiveElement {
       },
       styles: {
         sass
-      }
+      },
+      props
     });
 
     this.compileRouter();
@@ -57,50 +53,12 @@ export default class HeaderNavigation extends ReactiveElement {
     isMenuActive: false
   };
 
-  public routes: Routes = {
-    "/": {
-      component: new HomeView(),
-      title: "Home",
-    },
-    "/apply-for-grant": {
-      component: new ApplyForGrants(),
-      title: "Apply for Grant",
-    },
-    "/blog": {
-      component: new BlogView(),
-      title: "Blog",
-    },
-    "/brand-assets": {
-      component: new BrandAssets(),
-      title: "Brand Assets",
-    },
-    "/discover-initiatives": {
-      component: new DiscoverInitiatives(),
-      title: "Discover Initiatives",
-    },
-    "/faq": {
-      component: new FAQView(),
-      title: "FAQ",
-    },
-    "/funded-grants": {
-      component: new FundedGrants(),
-      title: "Funded Grants",
-    },
-    "/program-expenses": {
-      component: new ProgramExpenses(),
-      title: "Program Expenses",
-    },
-    "error-404": {
-      component: new Error404(),
-      title: "Not Found | 404",
-    },
-  };
+  public routes: Routes = routes;
+  public compiledRoutes: Routes;
 
   public components: Record<string, HTMLElement> = {
     socialLinks: new SocialLinks()
   }
-
-  public compiledRoutes: Routes;
 
   public onConnected(): void {
     let handleRoutingRef = this.handleRouting.bind(this);
@@ -163,7 +121,7 @@ export default class HeaderNavigation extends ReactiveElement {
           observerNestedRoutes(newPropKey, subNestedRouteKey, subNestedProps);
         }
       }
-    };
+    }
 
     for (const [key, props] of Object.entries(routes)) {
       if (props.routes) {

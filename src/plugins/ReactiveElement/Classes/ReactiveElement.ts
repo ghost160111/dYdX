@@ -45,7 +45,7 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
   public $root?: ShadowRoot;
   public template: HTMLTemplateElement;
   protected templateContent: string;
-  protected refs: {};
+  protected refs: Record<string, HTMLElement & NodeListOf<HTMLElement>>;
   public componentID: string;
   public eventHandlers: Record<string, Map<string | symbol, EventListener>>;
 
