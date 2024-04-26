@@ -1,9 +1,5 @@
-import Base from "./Base";
-
-export default class FadeTransition extends Base {
+export default class FadeTransition {
   constructor(targetNode: Node, duration?: number) {
-    super();
-
     this.targetNode = targetNode;
 
     this.mutationObserverOptions = {

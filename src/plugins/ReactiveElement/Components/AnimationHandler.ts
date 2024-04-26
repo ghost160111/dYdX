@@ -1,7 +1,7 @@
 import BaseComponent from "./BaseComponent";
 
-type AnimationKeyframes = Keyframe[] | PropertyIndexedKeyframes;
-type AnimationKeyframeOptions = number | KeyframeAnimationOptions;
+export type AnimationKeyframes = Keyframe[] | PropertyIndexedKeyframes;
+export type AnimationKeyframeOptions = number | KeyframeAnimationOptions;
 
 export default class AnimationHandler extends BaseComponent {
   constructor(context: any) {
