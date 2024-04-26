@@ -6,7 +6,7 @@ const Errors = {
   isNotInstanceOfReactiveElement: "Component is not an instance of ReactiveElement!"
 }
 
-interface ComponentsOptions {
+export interface ComponentsOptions {
   instance: ReactiveElement;
   setFadeTransition?: {
     value: boolean,
