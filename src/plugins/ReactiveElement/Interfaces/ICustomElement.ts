@@ -1,7 +1,7 @@
-import { BaseHandler, ShadowDOMHandler, StyleHandler } from "../ReactiveElementLib";
+import { DisconnectHandler, ShadowDOMHandler, StyleHandler } from "../ReactiveElementLib";
 
 export default interface ICustomElement {
-  base: BaseHandler;
+  disconnectHandler: DisconnectHandler;
   styles?: StyleHandler;
   shadowDOM?: ShadowDOMHandler;
   $root?: ShadowRoot;

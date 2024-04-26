@@ -1,6 +1,6 @@
 import BaseComponent from "./BaseComponent";
 
-export default class BaseHandler extends BaseComponent {
+export default class DisconnectHandler extends BaseComponent {
   constructor(context: any) {
     super(context);
   }
@@ -12,6 +12,8 @@ export default class BaseHandler extends BaseComponent {
     this.destroyStyles();
     this.destroyShadowDOM();
     this.destroyStateHandler();
+    this.destroyFadeTransition();
+
     this.context.base = null;
 
     if (this.context.devMode) {
@@ -59,6 +61,13 @@ export default class BaseHandler extends BaseComponent {
     this.context.eventHandlers = {};
   }
 
+  protected destroyFadeTransition(): void {
+    if (this.context.fadeTransition) {
+      this.context.fadeTransition.destroy();
+      this.context.fadeTransition = null;
+    }
+  }
+
   public logDestroyedObjects(): void {
     console.log("Emptied base component instance: ", this.context.base);
     console.log("Emptied styles component instance: ", this.context.styles);
@@ -68,6 +77,7 @@ export default class BaseHandler extends BaseComponent {
     console.log("Emptied stateHandler instance: ", this.context.stateHandler);
     console.log("Emptied animationHandler instance: ", this.context.animationHandler);
     console.log("Emptied eventHandler instance: ", this.context.eventHandler);
+    console.log("Emptied fadeTransition instance: ", this.context.fadeTransition);
     console.log("Destroyed object with ID: ", this.context.componentID);
   }
 }

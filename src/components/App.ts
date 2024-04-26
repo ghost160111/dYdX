@@ -40,4 +40,64 @@ export default class App {
     this.reactiveApp = new ReactiveApp(this.root, this.components);
     this.reactiveApp.render();
   }
+
+  public deleteApp(): void {
+    let app = document.getElementById("app");
+
+    this.root.animate(
+      [
+        { opacity: 1 },
+        { opacity: 0 }
+      ],
+      {
+        easing: "linear",
+        duration: 1000
+      }
+    );
+
+    setTimeout(() => {
+      this.root.animate(
+        [
+          { opacity: 0 },
+          { opacity: 1 }
+        ],
+        {
+          easing: "linear",
+          duration: 1000
+        }
+      );
+      this.root.innerHTML = /*html*/`
+        <h1 style="font-size:4rem;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);">Good Bye!!!</h1>
+      `;
+    }, 1000);
+
+    setTimeout(() => {
+      this.root.animate(
+        [
+          { opacity: 1 },
+          { opacity: 0 }
+        ],
+        {
+          easing: "linear",
+          duration: 1000
+        }
+      );
+
+      app.animate(
+        [
+          { background: "black" }
+        ],
+        {
+          easing: "linear",
+          duration: 1000
+        }
+      );
+    }, 2500);
+
+    setTimeout(() => {
+      this.root.innerHTML = "";
+
+      app.style.background = "black";
+    }, 3400);
+  }
 }

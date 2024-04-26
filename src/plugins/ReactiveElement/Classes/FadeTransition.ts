@@ -48,4 +48,8 @@ export default class FadeTransition {
       characterData: true
     });
   }
+
+  public destroy(): void {
+    this.mutationObserver.disconnect();
+  }
 }

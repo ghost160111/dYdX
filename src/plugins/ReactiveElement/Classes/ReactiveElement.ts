@@ -1,7 +1,7 @@
 import FadeTransition from "./FadeTransition";
 import PopupContentHandler from "../Components/PopupContentHandler";
 import {
-  BaseHandler,
+  DisconnectHandler,
   ShadowDOMHandler,
   StyleHandler,
   StateHandler,
@@ -34,32 +34,34 @@ export interface UpdateChangedOptions {
 export type Watcher = Record<string, (newValue: any, oldValue: any) => void>;
 
 export default class ReactiveElement extends HTMLElement implements ICustomElement {
-  public base: BaseHandler;
-  public styles?: StyleHandler;
+  //#region PUBLIC
+  public $root?: ShadowRoot;
+  public animationHandler?: AnimationHandler;
+  public componentID: string;
+  public components: Record<string, HTMLElement | InstanceType<CustomElementConstructor>>;
+  public data: {};
+  public disconnectHandler: DisconnectHandler;
+  public eventHandler?: EventHandler;
+  public eventHandlers: Record<string, Map<string | symbol, EventListener>>;
+  public fadeTransition: FadeTransition;
+  public popupContentHandler?: PopupContentHandler;
+  public props: {};
+  public refProxy: {};
   public shadowDOM?: ShadowDOMHandler;
   public stateHandler?: StateHandler;
-  public animationHandler?: AnimationHandler;
-  public eventHandler?: EventHandler;
-  public popupContentHandler?: PopupContentHandler;
-
-  public $root?: ShadowRoot;
+  public styles?: StyleHandler;
   public template: HTMLTemplateElement;
-  protected templateContent: string;
-  protected refs: Record<string, HTMLElement & NodeListOf<HTMLElement>>;
-  public componentID: string;
-  public eventHandlers: Record<string, Map<string | symbol, EventListener>>;
+  public templateContent: string;
+  public watch: Watcher;
+  //#endregion
 
+  //#region PROTECTED
   protected componentConfig: ISetupConfig;
   protected controller: AbortController;
-  protected components: Record<string, HTMLElement | InstanceType<CustomElementConstructor>>;
   protected devMode: boolean;
+  protected refs: Record<string, HTMLElement & NodeListOf<HTMLElement>>;
   protected sharedState: SharedState;
-
-  public data: {};
-  public refProxy: {};
-  public watch: Watcher;
-
-  public props: {};
+  //#endregion
 
   constructor(setupConfig?: ISetupConfig, components?: {}) {
     super();
@@ -118,7 +120,7 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
    * This method is responsible for defining web component's different instance objects and properties!
    */
   private setupHandlers(setupConfig?: ISetupConfig): void {
-    this.base = new BaseHandler(this);
+    this.disconnectHandler = new DisconnectHandler(this);
 
     this.setupConfig(setupConfig);
 
@@ -177,7 +179,7 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
       }
 
       if (setupConfig.setFadeInTransition && setupConfig.setFadeInTransition.value) {
-        new FadeTransition(this.$root, setupConfig.setFadeInTransition.duration ?? 1000);
+        this.fadeTransition = new FadeTransition(this.$root, setupConfig.setFadeInTransition.duration ?? 1000);
       }
     }
   }
@@ -197,7 +199,7 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
    * This method is CustomElements API's lifecycle method, that is called when element is remove from document!
    */
   private disconnectedCallback(): void {
-    this.base.destroy();
+    this.disconnectHandler.destroy();
     this.onDisconnected();
   }
 

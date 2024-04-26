@@ -75,7 +75,7 @@ const buildNameOption = () => {
   return (isDev) ? "dist" : "build";
 }
 
-const webpackConfig = {
+export default {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
@@ -87,7 +87,7 @@ const webpackConfig = {
     assetModuleFilename: assetFileName()
   },
   resolve: {
-    extensions: disableExtensions(".js", ".ts", ".jsx"),
+    extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
       "@": path.resolve(__dirname, "src")
     }
@@ -117,14 +117,14 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: [
           "style-loader",
           "css-loader"
         ]
       },
       {
-        test: /\.(sass|scss)$/i,
+        test: /\.(sass|scss)$/,
         use: [
           "style-loader",
           "css-loader",
@@ -132,39 +132,53 @@ const webpackConfig = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: "asset/resource",
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
         type: "asset/resource",
       },
       {
-        test: /\.(js|mjs)$/i,
-        exclude: "/node_modules",
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: babelOptions()
+          options: {
+            presets: ["@babel/preset-env"]
+          }
         }
       },
       {
-        test: /\.ts$/i,
-        exclude: "/node_modules",
+        test: /\.ts$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: babelOptions("@babel/preset-typescript")
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-typescript"]
+          }
         }
       },
       {
-        test: /\.jsx$/i,
-        exclude: "/node-modules",
+        test: /\.jsx$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: babelOptions("@babel/preset-react")
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"]
+          }
+        }
+      },
+      {
+        test: /\.tsx$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"]
+          }
         }
       }
     ]
   }
 }
-
-export default webpackConfig;
