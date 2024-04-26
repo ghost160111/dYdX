@@ -5,6 +5,6 @@ export interface Route {
   title?: string;
   callback?: () => void;
   routes?: Routes;
-};
+}
 
 export type Routes = Record<string, Route>;

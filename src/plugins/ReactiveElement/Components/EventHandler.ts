@@ -4,11 +4,11 @@ import {
   IEventMapKeyList
 } from "../Interfaces/InterfacesTypes";
 
-type ObjectElement = string | symbol | HTMLElement | Document | Window | ShadowRoot;
-type EventMapsObjectElement = keyof HTMLElementEventMap | keyof DocumentEventMap | keyof WindowEventMap | keyof ShadowRootEventMap;
-type ObjectElementListenerOptions = boolean | AddEventListenerOptions;
+export type ObjectElement = string | symbol | HTMLElement | Document | Window | ShadowRoot;
+export type EventMapsObjectElement = keyof HTMLElementEventMap | keyof DocumentEventMap | keyof WindowEventMap | keyof ShadowRootEventMap;
+export type ObjectElementListenerOptions = boolean | AddEventListenerOptions;
 
-interface AddOrRemoveEventListener {
+export interface AddOrRemoveEventListener {
   addEventListener: string;
   removeEventListener: string;
 }
@@ -16,9 +16,10 @@ interface AddOrRemoveEventListener {
 export default class EventHandler extends BaseComponent {
   constructor(context: any) {
     super(context);
+    this.eventMapKeyList = [];
   }
 
-  protected eventMapKeyList: IEventMapKeyList[] = [];
+  protected eventMapKeyList: IEventMapKeyList[];
 
   protected checkTypeSetEvent(options: keyof AddOrRemoveEventListener, object: ObjectElement, eventType: EventMapsObjectElement, eventListenerReference: EventListener, eventListenerOptions?: boolean | AddEventListenerOptions): void {
     const checkOptions = (setOrRemoveEventOption: keyof AddOrRemoveEventListener, eventListenerOptions?: ObjectElementListenerOptions): ObjectElementListenerOptions => {

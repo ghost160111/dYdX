@@ -3,11 +3,12 @@ import BaseComponent from "./BaseComponent";
 type ObjectOptions = PropertyDescriptor & ThisType<any>;
 
 export default class ShadowDOMHandler extends BaseComponent {
-  public refs: Record<string, HTMLElement> = {};
+  public refs: Record<string, HTMLElement>;
   protected refNodeList: NodeListOf<HTMLElement>;
 
   constructor(context: any) {
     super(context);
+    this.refs = {};
     this.observeRefs();
   }
 

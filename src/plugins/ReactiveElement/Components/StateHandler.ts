@@ -4,13 +4,15 @@ import BaseComponent from "./BaseComponent";
 export default class StateHandler extends BaseComponent {
   constructor(context: any) {
     super(context);
+    this.watchers = {};
+    this.attributesMap = AttributesMap;
   }
 
   public refDataNodeList: NodeListOf<HTMLElement>;
   public _watch: Record<string, (newValue: any, oldValue: any) => void>;
-  public watchers: { [key: string]: (newValue: any, oldValue: any) => void } = {};
+  public watchers: { [key: string]: (newValue: any, oldValue: any) => void };
   public _proxiedData: {};
-  private attributesMap: Map<string, string> = AttributesMap;
+  private attributesMap: Map<string, string>;
 
   public watch(property: string, callback: (newValue: any, oldValue: any) => void): void {
     if (!this.watchers[property]) {

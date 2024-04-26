@@ -1,4 +1,4 @@
-interface DefineComponentOptions {
+export interface DefineComponentOptions {
   tag: string;
   template?: string;
   composableObjects?: {}[];

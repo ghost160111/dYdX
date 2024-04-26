@@ -4,12 +4,12 @@ import AppHeader from "./Layout/Header/AppHeader";
 import AppMain from "./Layout/Main/AppMain";
 import ScrollTop from "./Global/ScrollTop";
 
-export default class Main {
+export default class App {
   private root: HTMLElement;
   private reactiveApp: ReactiveApp;
   private components: Record<string, ComponentsOptions>;
 
-  public startApp(): void {
+  public main(): void {
     this.root = document.querySelector(".app-wrapper");
 
     this.components = {

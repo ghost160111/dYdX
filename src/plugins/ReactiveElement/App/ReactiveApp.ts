@@ -1,7 +1,7 @@
 import FadeTransition from "../Classes/FadeTransition";
 import { ReactiveElement } from "../ReactiveElementLib";
 
-const Errors = {
+export const REACTIVE_APP_ERRORS = {
   rootElementNotFound: "Root element wasn't found, it is null. Either it doesn't exist, nor it does exist, but there is inaccurate invocation in callstack.",
   isNotInstanceOfReactiveElement: "Component is not an instance of ReactiveElement!"
 }
@@ -22,12 +22,12 @@ export default class ReactiveApp {
     this.root = root;
 
     if (!root) {
-      throw Error(Errors.rootElementNotFound);
+      throw Error(REACTIVE_APP_ERRORS.rootElementNotFound);
     }
 
     for (const [key, component] of Object.entries(components)) {
       if (!(component.instance instanceof ReactiveElement)) {
-        throw TypeError(Errors.isNotInstanceOfReactiveElement);
+        throw TypeError(REACTIVE_APP_ERRORS.isNotInstanceOfReactiveElement);
       }
     }
 
