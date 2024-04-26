@@ -6,11 +6,12 @@ import ScrollTop from "./Global/ScrollTop";
 
 export default class Main {
   private root: HTMLElement;
+  private reactiveApp: ReactiveApp;
 
   public startApp(): void {
     this.root = document.querySelector(".app-wrapper");
 
-    let reactiveApp = new ReactiveApp(this.root, {
+    this.reactiveApp = new ReactiveApp(this.root, {
       appHeader: {
         instance: new AppHeader(),
         setFadeTransition: {
@@ -35,6 +36,6 @@ export default class Main {
       }
     });
 
-    reactiveApp.render();
+    this.reactiveApp.render();
   }
 }
