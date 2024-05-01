@@ -34,7 +34,7 @@ export default class HeaderLogo extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("logo", "click", this.preventDefault);
+    this.eventHandler.subscribe("logo", "home-navigate", "click", this.preventDefault);
   }
 
   public preventDefault(event: any): void {

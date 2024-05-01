@@ -29,7 +29,6 @@ export default class BlogView extends ReactiveElement {
   }
 
   public onConnected(): void {
-    this.refs["container"].innerHTML = "";
-    this.refs["container"].appendChild(this.components["blogList"]);
+    this.shadowDOM.setContentToNode(this.refs["container"], this.components["blogList"]);
   }
 }

@@ -1,8 +1,4 @@
 import BaseComponent from "./BaseComponent";
-import {
-  IEventMapKey,
-  IEventMapKeyList
-} from "../Interfaces/InterfacesTypes";
 
 export type ObjectElement = string | symbol | HTMLElement | Document | Window | ShadowRoot;
 export type EventMapsObjectElement = keyof HTMLElementEventMap | keyof DocumentEventMap | keyof WindowEventMap | keyof ShadowRootEventMap;
@@ -13,13 +9,22 @@ export interface AddOrRemoveEventListener {
   removeEventListener: string;
 }
 
+export type EventProperties = {
+  object: ObjectElement;
+  eventType: EventMapsObjectElement;
+  eventListenerRef: EventListener;
+  eventListenerOptions?: ObjectElementListenerOptions;
+  parameters?: any[];
+}
+
 export default class EventHandler extends BaseComponent {
   constructor(context: any) {
     super(context);
-    this.eventMapKeyList = [];
+
+    this.eventMapList = new Map<string, EventProperties>();
   }
 
-  protected eventMapKeyList: IEventMapKeyList[];
+  public eventMapList: Map<string, EventProperties>;
 
   protected checkTypeSetEvent(options: keyof AddOrRemoveEventListener, object: ObjectElement, eventType: EventMapsObjectElement, eventListenerReference: EventListener, eventListenerOptions?: boolean | AddEventListenerOptions): void {
     const checkOptions = (setOrRemoveEventOption: keyof AddOrRemoveEventListener, eventListenerOptions?: ObjectElementListenerOptions): ObjectElementListenerOptions => {
@@ -41,37 +46,41 @@ export default class EventHandler extends BaseComponent {
     }
   }
 
-  public subscribe(object: ObjectElement, eventType: EventMapsObjectElement, eventListener: EventListener | CallableFunction, eventListenerOptions?: ObjectElementListenerOptions, ...parameters: any[]): EventHandler {
-    let eventListenerName = eventListener.name;
-    let eventListenerReference: EventListener = eventListener.bind(this.context, ...parameters);
-    let eventObjectRefName = object.toString() + "-" + eventListenerName;
-    let eventMapKeyOptionsRef: IEventMapKeyList = { eventType, object, parameters, eventListenerName, eventObjectRefName };
+  public subscribe(object: ObjectElement, id: string, eventType: EventMapsObjectElement, eventListener: Function, eventListenerOptions?: ObjectElementListenerOptions, ...parameters: any[]): void {
+    let eventListenerRef: EventListener = eventListener.bind(this.context, ...parameters);
 
-    this.context.eventHandlers[eventObjectRefName] = new Map<IEventMapKey, EventListener>();
-
-    this.context.eventHandlers[eventObjectRefName].set(eventMapKeyOptionsRef, eventListenerReference);
-    this.eventMapKeyList.push(eventMapKeyOptionsRef);
-
-    this.checkTypeSetEvent("addEventListener", object, eventType, eventListenerReference, eventListenerOptions);
-
-    return this;
-  }
-
-  public unsubscribe(object: ObjectElement, eventType: EventMapsObjectElement, eventObjectRefName: string): EventHandler {
-    for (const [key, eventListenerRef] of this.context.eventHandlers[eventObjectRefName]) {
-      if (object === key["object"] && eventType === key["eventType"]) {
-        this.checkTypeSetEvent("removeEventListener", object, eventType, eventListenerRef);
-      }
+    if (this.eventMapList.get(id)) {
+      console.warn(`The id '${id}' is already assigned for event: ${this.eventMapList.get(id)}`);
     }
 
-    return this;
+    this.eventMapList.set(id, { object, eventType, eventListenerRef, eventListenerOptions, parameters });
+    this.checkTypeSetEvent("addEventListener", object, eventType, eventListenerRef, eventListenerOptions);
+
+    Object.defineProperty(this.context.eventHandlers, id, {
+      enumerable: true,
+      writable: true,
+      configurable: true,
+      value: { object, eventType, eventListenerRef, eventListenerOptions, parameters }
+    });
+  }
+
+  public unsubscribe(id: string): void {
+    for (const [eventId, eventProperties] of this.eventMapList.entries()) {
+      if (eventId === id) {
+        const { object, eventType, eventListenerRef, eventListenerOptions } = eventProperties;
+
+        this.checkTypeSetEvent("removeEventListener", object, eventType, eventListenerRef, eventListenerOptions);
+
+        if (this.context.eventHandlers[id]) {
+          delete this.context.eventHandlers[id];
+        }
+      }
+    }
   }
 
   public unsubscribeEvents(): void {
-    for (let i = 0; i < this.eventMapKeyList.length; ++i) {
-      let eventMapKey = this.eventMapKeyList[i];
-      let { object, eventType, eventObjectRefName } = eventMapKey;
-      this.unsubscribe(object, eventType, eventObjectRefName);
+    for (const [eventId] of this.eventMapList.entries()) {
+      this.unsubscribe(eventId);
     }
   }
 

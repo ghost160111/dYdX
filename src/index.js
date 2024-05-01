@@ -16,7 +16,3 @@ animate({
 
 const app = new App();
 app.main();
-
-setTimeout(() => {
-  app.deleteApp();
-}, 5000);

@@ -58,7 +58,7 @@ export default class RefContent extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("link", "click", this.navigateTo);
+    this.eventHandler.subscribe("link", "link-click", "click", this.navigateTo);
   }
 
   public navigateTo(event: any): void {

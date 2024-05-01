@@ -59,7 +59,7 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
   protected componentConfig: ISetupConfig;
   protected controller: AbortController;
   protected devMode: boolean;
-  protected refs: Record<string, HTMLElement & NodeListOf<HTMLElement>>;
+  protected refs: Record<string, HTMLElement & NodeListOf<HTMLElement> & ReactiveElement>;
   protected sharedState: SharedState;
   //#endregion
 

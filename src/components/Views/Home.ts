@@ -178,7 +178,6 @@ export default class HomeView extends ReactiveElement {
       <slot slot="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nulla risus, consectetur ut bibendum non, gravida non libero.</slot>
     `;
 
-    this.shadowDOM.setContentToNode(this.refs["projects-ref"], this.components["projectsReference"]);
     this.shadowDOM.setContentToNode(this.refs["posts-slider"], this.components["postsSlider"]);
     this.shadowDOM.setContentToNode(this.refs["blogs-ref"], this.components["blogsReference"]);
     this.shadowDOM.setContentToNode(this.refs["blogs-list"], this.components["blogsList"]);
@@ -188,7 +187,7 @@ export default class HomeView extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("nav-items", "click", this.preventDefaultHandler);
+    this.eventHandler.subscribe("nav-items", "nav-items-click", "click", this.preventDefaultHandler);
   }
 
   public preventDefaultHandler(event: any): void {

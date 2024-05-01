@@ -31,7 +31,7 @@ export default class FooterApplyGrant extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("ref-apply", "click", this.moveToGrants);
+    this.eventHandler.subscribe("ref-apply", "footer-apply-grant-ref", "click", this.moveToGrants);
   }
 
   public moveToGrants(event: MouseEvent): void {

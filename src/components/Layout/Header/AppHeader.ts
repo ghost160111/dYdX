@@ -10,6 +10,7 @@ import HeaderNavigation from "./components/HeaderNavigation";
   template: /*html*/`
     <header class="header" ref="header">
       <div class="header-wrapper">
+        <div id="test-component"></div>
         <nav class="nav" ref="navigation">
         </nav>
       </div>
@@ -43,7 +44,7 @@ export default class AppHeader extends ReactiveElement {
 
   public events(): void {
     let appRoot: HTMLElement = document.querySelector("#app");
-    this.eventHandler.subscribe(appRoot, "scroll", this.onScrollChange);
+    this.eventHandler.subscribe(appRoot, "app-root-scroll", "scroll", this.onScrollChange);
   }
 
   public onScrollChange(event: any): void {

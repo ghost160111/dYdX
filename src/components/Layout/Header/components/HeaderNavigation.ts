@@ -68,9 +68,9 @@ export default class HeaderNavigation extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("nav-items", "click", this.preventDefaultHandler);
-    this.eventHandler.subscribe(window, "popstate", this.handleRouting);
-    this.eventHandler.subscribe("menu-toggle-btn", "click", this.toggleMenuHandler);
+    this.eventHandler.subscribe("nav-items", "nav-items-click", "click", this.preventDefaultHandler);
+    this.eventHandler.subscribe(window, "window-state-route", "popstate", this.handleRouting);
+    this.eventHandler.subscribe("menu-toggle-btn", "menu-toggle-event", "click", this.toggleMenuHandler);
   }
 
   public toggleMenuHandler(): void {

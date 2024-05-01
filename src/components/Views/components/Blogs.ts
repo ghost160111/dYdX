@@ -18,25 +18,10 @@ export interface BlogsListProps {
   tag: "blogs-list",
   template: /*html*/`
     <div class="container">
-      <h2
-        class="container__title h-xlarge"
-        ref="title"
-        ref-data="title"
-      ></h2>
-      <ul
-        class="container__filter-list"
-        ref="filter-list"
-      ></ul>
-      <ul
-        class="container__blogs-list"
-        ref="blog-list"
-      ></ul>
-      <button
-        class="container__load-more-btn dydx-btn"
-        ref="load-more-btn"
-        ref-data="loadMoreBtnText"
-        ref-title="loadMoreBtnText"
-      ></button>
+      <h2 class="container__title h-xlarge" ref="title" ref-data="title"></h2>
+      <ul class="container__filter-list" ref="filter-list"></ul>
+      <ul class="container__blogs-list" ref="blog-list"></ul>
+      <button class="container__load-more-btn dydx-btn" ref="load-more-btn" ref-data="loadMoreBtnText" ref-title="loadMoreBtnText"></button>
     </div>
   `
 })
@@ -126,11 +111,11 @@ export default class BlogsList extends ReactiveElement {
           }
         }
 
-        this.generateFilterList();
-        this.events();
-
         this.refs["load-more-btn"].classList.remove("hide");
         this.refProxy["initialLoad"] = true;
+
+        this.generateFilterList();
+        this.events();
 
         this.hideBlogs();
 
@@ -148,9 +133,11 @@ export default class BlogsList extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("filter-btns", "click", this.filterHandler);
-    this.eventHandler.subscribe("load-more-btn", "click", this.loadMoreBlogsHandler, { once: true });
-    this.eventHandler.subscribe("text-input", "input", this.inputHandle);
+    if (this.refProxy["initialLoad"]) {
+      this.eventHandler.subscribe("filter-btns", "filter-btns-click", "click", this.filterHandler);
+      this.eventHandler.subscribe("load-more-btn", "load-more-btn-click", "click", this.loadMoreBlogsHandler, { once: true });
+      this.eventHandler.subscribe("text-input", "text-input-event", "input", this.inputHandle);
+    }
   }
 
   public inputHandle(event: any): void {
@@ -209,6 +196,7 @@ export default class BlogsList extends ReactiveElement {
 
   public hideBlogs(): void {
     for (let i: number = 0 ; i < this.refs["blog-items"].length; ++i) {
+      // @ts-ignore
       let blog: Blog = this.refs["blog-items"][i];
       if (i >= 6) {
         blog.hideImmediate();
@@ -218,6 +206,7 @@ export default class BlogsList extends ReactiveElement {
 
   public loadMoreBlogsHandler(): void {
     for (let i: number = 0; i < this.refs["blog-items"].length; ++i) {
+      // @ts-ignore
       let blog: Blog = this.refs["blog-items"][i];
       blog.show();
     }

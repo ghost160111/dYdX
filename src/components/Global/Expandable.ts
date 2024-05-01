@@ -3,7 +3,7 @@ import sass from "!css-loader!sass-loader!./styles/Expandable.scss";
 import { ReactiveElement } from "../../plugins/ReactiveElement/ReactiveElementLib";
 import DefineComponent from "../../plugins/ReactiveElement/Decorators/DefineComponent";
 
-interface IExpandableProps {
+export interface IExpandableProps {
   title: string;
   content: string;
 }
@@ -41,8 +41,8 @@ export default class Expandable extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("title", "click", this.toggleComponent);
-    this.eventHandler.subscribe("plus", "click", this.toggleComponent);
+    this.eventHandler.subscribe("title", "title-click", "click", this.toggleComponent);
+    this.eventHandler.subscribe("plus", "plus-click", "click", this.toggleComponent);
   }
 
   public closeHandler(event: any): void {

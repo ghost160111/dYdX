@@ -54,7 +54,7 @@ export default class AppFooter extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("nav-items", "click", this.preventDefaultHandler);
+    this.eventHandler.subscribe("nav-items", "nav-items-click-event", "click", this.preventDefaultHandler);
   }
 
   public preventDefaultHandler(event: any): void {

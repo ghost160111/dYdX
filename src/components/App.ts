@@ -6,8 +6,8 @@ import ScrollTop from "./Global/ScrollTop";
 
 export default class App {
   private root: HTMLElement;
-  private reactiveApp: ReactiveApp;
-  private components: Record<string, ComponentsOptions>;
+  public reactiveApp: ReactiveApp;
+  public components: Record<string, ComponentsOptions>;
 
   public main(): void {
     this.root = document.querySelector(".app-wrapper");

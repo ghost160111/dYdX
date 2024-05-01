@@ -7,15 +7,10 @@ import PostCard, { IPostCard } from "./PostCard";
 @DefineComponent({
   tag: "posts-slider",
   template: /*html*/`
-    <div
-      class="slider-container"
-      ref="slider-container"
-    ></div>
-    <button
-      ref="slide-btn"
-      class="slide-btn"
-      type="button"
-    ></button>
+    <div class="slider">
+      <div class="slider-container" ref="slider-container"></div>
+      <button ref="slide-btn" class="slide-btn" type="button"></button>
+    </div>
   `
 })
 export default class PostsSlider extends ReactiveElement {
@@ -48,7 +43,7 @@ export default class PostsSlider extends ReactiveElement {
   }
 
   public events(): void {
-    this.eventHandler.subscribe("slide-btn", "click", this.slideForward);
+    this.eventHandler.subscribe("slide-btn", "slide-btn-click", "click", this.slideForward);
   }
 
   public slideForward(): void {

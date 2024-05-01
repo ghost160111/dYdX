@@ -40,8 +40,8 @@ export default class ScrollTop extends ReactiveElement {
 
     this.refs["scroll-top-btn"].classList.add("scroll-to-top-btn--hidden");
 
-    this.eventHandler.subscribe("scroll-top-btn", "click", this.onClickBtnHandler, {}, appRoot);
-    this.eventHandler.subscribe(appRoot, "scroll", this.onScrollHandler, {}, this.refs["scroll-top-btn"]);
+    this.eventHandler.subscribe("scroll-top-btn", "scroll-top-btn-click", "click", this.onClickBtnHandler, {}, appRoot);
+    this.eventHandler.subscribe(appRoot, "app-root-scroll-change", "scroll", this.onScrollHandler, {}, this.refs["scroll-top-btn"]);
   }
 
   public onClickBtnHandler(appRoot: HTMLElement): void {
