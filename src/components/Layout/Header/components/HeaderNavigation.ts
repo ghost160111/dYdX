@@ -23,11 +23,20 @@ export interface HeaderNavigationProps {
         <li class="socials" ref="social-links"></li>
       </ul>
       <a class="nav-list__item dydx-btn dydx-btn--accent-brand dydx-btn--original-width" id="apply-ref" ref="nav-items" href="/apply-for-grant">Apply</a>
-      <button
-        class="menu-toggle-btn"
-        ref="menu-toggle-btn"
-        type="button"
-      ></button>
+      <button class="menu-toggle-btn" ref="menu-toggle-btn" type="button">
+        Toggle Menu
+        <svg class="menu-toggle-btn__svg-burger" width="40" height="40" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12H14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M2 8H14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M2 4H14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <svg class="menu-toggle-btn__svg-cancel" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
     </div>
   `
 })

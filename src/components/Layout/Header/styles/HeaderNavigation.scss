@@ -25,7 +25,7 @@
   min-height: rem(48);
   max-height: rem(48);
 
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 
   & > li {
     min-height: rem(48);
@@ -55,32 +55,33 @@
     left: 0;
     top: 0;
 
+    transform: translate(330%, 0);
+
     flex-flow: column;
     justify-content: center;
     align-items: center;
 
-    width: 100%;
+    width: 30%;
     min-height: 100dvh;
     max-height: 100dvh;
 
-    opacity: 0;
     visibility: hidden;
     background-color: var(--bg-secondary);
 
-    transform: scale(2);
-
     &--active {
-      opacity: 1;
       visibility: visible;
+      transform: translate(240%, 0);
     }
   }
 
   @media screen and (max-width: 639px) {
-    transform: scale(1.25);
-  }
+    width: 100%;
 
-  @media screen and (max-width: 400px) {
-    transform: scale(1);
+    transform: translate(100%, 0);
+
+    &--active {
+      transform: translate(0, 0);
+    }
   }
 }
 
@@ -120,11 +121,27 @@
   }
 }
 
+@keyframes menu-toggle {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(0);
+  }
+}
+
 .menu-toggle-btn {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 0;
 
   opacity: 0;
   visibility: hidden;
@@ -134,10 +151,6 @@
   height: rem(40);
 
   background: transparent;
-  background-image: url("~@/assets/images/burger.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
 
   &:hover {
     opacity: 0.75;
@@ -147,14 +160,40 @@
     opacity: 0.5;
   }
 
-  &--active {
-    background-image: url("@/assets/images/cancel.svg");
-  }
-
   @media screen and (max-width: 900px) {
     opacity: 1;
     visibility: visible;
     position: relative;
+
+    & > .menu-toggle-btn__svg-burger {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+      transition: all 0.5s ease;
+    }
+
+    & > .menu-toggle-btn__svg-cancel {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      transition: all 0.5s ease;
+    }
+
+    &--active {
+      & > .menu-toggle-btn__svg-burger {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        transform: rotateX(180deg);
+      }
+
+      & > .menu-toggle-btn__svg-cancel {
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+        transform: rotateY(180deg);
+      }
+    }
   }
 }
 

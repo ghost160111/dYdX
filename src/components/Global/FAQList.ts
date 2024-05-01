@@ -2,11 +2,13 @@ import { ReactiveElement } from "../../plugins/ReactiveElement/ReactiveElementLi
 import DefineComponent from "../../plugins/ReactiveElement/Decorators/DefineComponent";
 import Expandable from "./Expandable";
 
+interface FaqItem {
+  title: string;
+  content: string;
+}
+
 interface IFAQListProps {
-  faqList: {
-    title: string,
-    content: string
-  }[]
+  faqList: FaqItem[];
 }
 
 @DefineComponent({
@@ -44,13 +46,16 @@ export default class FAQList extends ReactiveElement {
       this.refs["faq-list"].innerHTML = "";
 
       for (let i = 0; i < faqList.length; ++i) {
+        let li = document.createElement("li");
         let faqItem = faqList[i];
         let faqItemUI = new Expandable({
           title: faqItem["title"],
           content: faqItem["content"]
         });
 
-        this.refs["faq-list"].appendChild(faqItemUI);
+        li.appendChild(faqItemUI);
+
+        this.refs["faq-list"].appendChild(li);
       }
     }
   }

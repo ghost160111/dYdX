@@ -187,6 +187,9 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
   /**
    * @description
    * This method is CustomElements API's lifecycle method, that is called when element is added to document!
+   *
+   * @warning
+   * Never override this method unless you need to do so, by default you won't need to do that!
    */
   private connectedCallback(): void {
     this.setupHandlers(this.componentConfig);
@@ -197,6 +200,9 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
   /**
    * @description
    * This method is CustomElements API's lifecycle method, that is called when element is remove from document!
+   *
+   * @warning
+   * Never override this method, unless you need to do so, by default you won't need to do that!
    */
   private disconnectedCallback(): void {
     this.disconnectHandler.destroy();
@@ -216,6 +222,9 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
    * This method is lifycycle method of CustomElements API, and is called whenever returned attribute value from getter observedAttributes is changed!
    */
   public attributeChangedCallback(name: string, oldValue: any, newValue: any): void {
+    if (this.devMode) {
+      console.log(name, oldValue, newValue);
+    }
   }
 
   /**
