@@ -1,10 +1,11 @@
 import BaseComponent from "./BaseComponent";
 
-type ObjectOptions = PropertyDescriptor & ThisType<any>;
+export type ObjectOptions = PropertyDescriptor & ThisType<any>;
 
 export default class ShadowDOMHandler extends BaseComponent {
   public refs: Record<string, HTMLElement>;
   protected refNodeList: NodeListOf<HTMLElement>;
+  protected observer: MutationObserver;
 
   constructor(context: any) {
     super(context);

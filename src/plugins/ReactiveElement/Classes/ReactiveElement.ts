@@ -132,8 +132,6 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
 
   private setupConfig(setupConfig?: ISetupConfig): void {
     if (setupConfig) {
-      this.styles = new StyleHandler(this);
-
       if (setupConfig.animations) {
         this.animationHandler = new AnimationHandler(this);
 
@@ -143,12 +141,24 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
       }
 
       if (setupConfig.styles) {
-        if (setupConfig.styles.css || setupConfig.styles.sass) {
-          if (setupConfig.styles.adds) {
-            if (setupConfig.styles.adds.margins) {
-              this.styles.setupMargins();
+        this.styles = new StyleHandler(this);
+
+        if (setupConfig.styles.adds) {
+          if (setupConfig.styles.adds.margins) {
+            this.styles.setupMargins();
+          }
+        }
+
+        if (setupConfig.styles.links) {
+          if (setupConfig.styles.links.length >= 1) {
+            for (let i = 0; i < setupConfig.styles.links.length; ++i) {
+              let styleID = setupConfig.styles.links[i];
+              this.sharedState.setLinkToRoot(this.$root, styleID);
             }
           }
+        }
+
+        if (setupConfig.styles.css || setupConfig.styles.sass) {
           this.$root.adoptedStyleSheets = [ this.styles.hostStylesheet ];
 
           if (setupConfig.styles.css) {
