@@ -60,7 +60,7 @@ export default class BlogsList extends ReactiveElement {
 
   public props: BlogsListProps;
 
-  public components: Record<string, HTMLElement> = {
+  public components: Record<string, ReactiveElement> = {
     "loading-state": new Loading(),
     "fetch-error": new FetchError({ errorMessage: "Couldn't load the requested data, sorry for inconvenience!" })
   }

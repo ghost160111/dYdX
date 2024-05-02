@@ -38,7 +38,7 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
   public $root?: ShadowRoot;
   public animationHandler?: AnimationHandler;
   public componentID: string;
-  public components: Record<string, HTMLElement | InstanceType<CustomElementConstructor>>;
+  public components: Record<string, ReactiveElement>;
   public data: {};
   public disconnectHandler: DisconnectHandler;
   public eventHandler?: EventHandler;

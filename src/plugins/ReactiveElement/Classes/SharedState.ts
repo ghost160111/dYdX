@@ -1,3 +1,10 @@
+import ReactiveElement from "./ReactiveElement";
+
+const SharedStateErrors = {
+  setUniqueID: "You need to set unique ID for Dynamic CSS reference list!",
+  specifyURL: "You need to specify URL of the dynamic CSS link!"
+}
+
 export default class SharedState {
   public components: {};
   public root: HTMLElement | null;
@@ -15,7 +22,7 @@ export default class SharedState {
    * @description
    * Most of the time, you won't need this method, because it is called automatically right in the base class (CustomHTMLElement)
    */
-  public setComponent(context: any, name: string): void {
+  public setComponent(context: ReactiveElement, name: string): void {
     Object.defineProperty(this.components, name, {
       configurable: true,
       enumerable: true,
@@ -35,8 +42,8 @@ export default class SharedState {
     }
   }
 
-  public async getComponent(name: any): Promise<HTMLElement> {
-    return new Promise<HTMLElement>((resolve: (value: HTMLElement) => void, reject: (reason?: any) => void): void => {
+  public async getComponent(name: any): Promise<ReactiveElement> {
+    return new Promise<ReactiveElement>((resolve: (value: ReactiveElement) => void, reject: (reason?: any) => void): void => {
       const checkComponent = (): void => {
         if (this.components[name] !== undefined) {
           resolve(this.components[name]);
@@ -44,19 +51,13 @@ export default class SharedState {
           setTimeout(checkComponent);
         }
       }
-
       checkComponent();
     });
   }
 
   public checkCSSProperties(id: string, url: string): void {
-    if (!id) {
-      throw "You need to set unique ID for Dynamic CSS reference list!";
-    }
-
-    if (!url) {
-      throw "You need to specify URL of the dynamic CSS link!";
-    }
+    if (!id) throw SharedStateErrors.setUniqueID;
+    if (!url) throw SharedStateErrors.specifyURL;
   }
 
   public setCSSURL(id: string, url: string): SharedState {
@@ -66,26 +67,24 @@ export default class SharedState {
     return this;
   }
 
-  public setLinkToRoot(context: any, styleID: string): void {
-    setTimeout(() => {
-      let dynamicCSSURL: string = this.cssListURLMap.get(styleID);
-      let root: ShadowRoot = context.$root;
+  public setLinkToRoot(context: ReactiveElement, styleID: string): void {
+    let dynamicCSSURL: string = this.cssListURLMap.get(styleID);
+    let root: ShadowRoot = context.$root;
 
-      if (dynamicCSSURL) {
-        let rootFirstChild: ChildNode = root.firstChild;
-        let link: HTMLLinkElement = document.createElement("link");
-        let hasChildNodes: boolean = root.hasChildNodes();
+    if (dynamicCSSURL) {
+      let rootFirstChild: ChildNode = root.firstChild;
+      let link: HTMLLinkElement = document.createElement("link");
+      let hasChildNodes: boolean = root.hasChildNodes();
 
-        link.rel = "stylesheet";
-        link.href = dynamicCSSURL;
+      link.rel = "stylesheet";
+      link.href = dynamicCSSURL;
 
-        if (hasChildNodes) {
-          if (!context[styleID]) {
-            root.insertBefore(link, rootFirstChild);
-            context[styleID] = true;
-          }
+      if (hasChildNodes) {
+        if (!context[styleID]) {
+          root.insertBefore(link, rootFirstChild);
+          context[styleID] = true;
         }
       }
-    });
+    }
   }
 }

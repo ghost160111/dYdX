@@ -188,6 +188,10 @@ export default class StateHandler extends BaseComponent {
     this.updateAttrDOM();
   }
 
+  /**
+   * @deprecated
+   * Not recommended for usage, as new method is being in development, and will be released soon.
+   */
   public forceUpdate(): void {
     this.cleanUpEvents();
     this.context.eventHandler.unsubscribeEvents();

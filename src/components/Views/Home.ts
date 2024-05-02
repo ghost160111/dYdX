@@ -15,7 +15,6 @@ import CurlyLine from "@/assets/images/curly-line.svg";
 // @ts-ignore
 import RoundyFrame from "@/assets/images/roundy-img.svg";
 import FAQList from "../Global/FAQList";
-import AppMain from "../Layout/Main/AppMain";
 
 @DefineComponent({
   tag: "home-view",
@@ -51,7 +50,7 @@ export default class HomeView extends ReactiveElement {
       },
       styles: {
         sass,
-        links: ["margins"]
+        links: ["margins", "fonts"]
       }
     });
   }
@@ -73,7 +72,7 @@ export default class HomeView extends ReactiveElement {
     `
   }
 
-  public components: Record<string, HTMLElement> = {
+  public components: Record<string, ReactiveElement> = {
     projectsReference: new RefContent(),
     blogsReference: new RefContent(),
     postsSlider: new PostsSlider(),
