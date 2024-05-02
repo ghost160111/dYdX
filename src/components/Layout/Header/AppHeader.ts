@@ -25,7 +25,7 @@ export default class AppHeader extends ReactiveElement {
         setOpacityAnimation: true
       },
       styles: {
-        sass: sass
+        sass
       }
     });
   }

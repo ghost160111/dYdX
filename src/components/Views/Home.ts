@@ -50,9 +50,7 @@ export default class HomeView extends ReactiveElement {
       },
       styles: {
         sass,
-        adds: {
-          margins: true
-        }
+        links: ["margins"]
       }
     });
   }

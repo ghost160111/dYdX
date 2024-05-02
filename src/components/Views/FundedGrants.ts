@@ -15,6 +15,7 @@ export default class FundedGrants extends ReactiveElement {
         setOpacityAnimation: true
       },
       styles: {
+        links: ["margins"]
       }
     });
   }
