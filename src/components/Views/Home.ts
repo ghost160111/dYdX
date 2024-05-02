@@ -15,6 +15,7 @@ import CurlyLine from "@/assets/images/curly-line.svg";
 // @ts-ignore
 import RoundyFrame from "@/assets/images/roundy-img.svg";
 import FAQList from "../Global/FAQList";
+import AppMain from "../Layout/Main/AppMain";
 
 @DefineComponent({
   tag: "home-view",
