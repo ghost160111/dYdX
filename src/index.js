@@ -6,6 +6,13 @@ import StyleMargins from "./plugins/ReactiveElement/Utils/StyleMargins.ts";
 import Fonts from "./plugins/ReactiveElement/Utils/Fonts.ts";
 import { sharedState } from "./plugins/ReactiveElement/Classes/ReactiveElement.ts";
 
+const worker = new Worker("./WebWorker1.js");
+
+worker.postMessage("this");
+worker.addEventListener("message", (event) => {
+  console.log("Message from worker: ", event.data);
+});
+
 const marginsCSS = new DynamicCSS(StyleMargins);
 const fontsCSS = new DynamicCSS(Fonts);
 
