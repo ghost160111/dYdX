@@ -153,7 +153,7 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
           if (setupConfig.styles.links.length >= 1) {
             for (let i = 0; i < setupConfig.styles.links.length; ++i) {
               let styleID = setupConfig.styles.links[i];
-              this.sharedState.setLinkToRoot(this.$root, styleID);
+              this.sharedState.setLinkToRoot(this, styleID);
             }
           }
         }

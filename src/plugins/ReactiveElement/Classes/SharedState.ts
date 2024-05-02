@@ -22,6 +22,17 @@ export default class SharedState {
       writable: true,
       value: context
     });
+
+    if (context && context.refProxy) {
+      for (const [styleID] of this.cssListURLMap.entries()) {
+        Object.defineProperty(context, styleID, {
+          configurable: true,
+          enumerable: true,
+          writable: true,
+          value: false
+        });
+      }
+    }
   }
 
   public async getComponent(name: any): Promise<HTMLElement> {
@@ -50,15 +61,15 @@ export default class SharedState {
 
   public setCSSURL(id: string, url: string): SharedState {
     this.checkCSSProperties(id, url);
-
     this.cssListURLMap.set(id, url);
 
     return this;
   }
 
-  public setLinkToRoot(root: ShadowRoot, styleID: string): void {
+  public setLinkToRoot(context: any, styleID: string): void {
     setTimeout(() => {
       let dynamicCSSURL: string = this.cssListURLMap.get(styleID);
+      let root: ShadowRoot = context.$root;
 
       if (dynamicCSSURL) {
         let rootFirstChild: ChildNode = root.firstChild;
@@ -69,14 +80,9 @@ export default class SharedState {
         link.href = dynamicCSSURL;
 
         if (hasChildNodes) {
-          for (let i = 0; i < root.childNodes.length; ++i) {
-            let childNode: ChildNode = root.childNodes[i];
-
-            if (childNode instanceof HTMLLinkElement && childNode.href !== link.href) {
-              root.insertBefore(link, rootFirstChild);
-            } else if (!(childNode instanceof HTMLLinkElement)) {
-              root.insertBefore(link, rootFirstChild);
-            }
+          if (!context[styleID]) {
+            root.insertBefore(link, rootFirstChild);
+            context[styleID] = true;
           }
         }
       }

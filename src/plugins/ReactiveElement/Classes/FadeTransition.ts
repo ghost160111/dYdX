@@ -1,4 +1,10 @@
 export default class FadeTransition {
+  protected mutationObserver: MutationObserver;
+  protected mutationObserverOptions: MutationObserverInit;
+  protected targetNode: Node;
+  protected keyframes: Keyframe[] | PropertyIndexedKeyframes | null;
+  protected options?: number | KeyframeAnimationOptions;
+
   constructor(targetNode: Node, duration?: number) {
     this.targetNode = targetNode;
 
@@ -6,7 +12,7 @@ export default class FadeTransition {
       childList: true,
       subtree: true,
       characterData: true
-    }
+    };
 
     this.keyframes = [
       { opacity: 0 },
@@ -21,32 +27,23 @@ export default class FadeTransition {
     this.start();
   }
 
-  protected mutationObserver: MutationObserver;
-  protected mutationObserverOptions: MutationObserverInit;
-  protected targetNode: Node;
-  protected keyframes: Keyframe[] | PropertyIndexedKeyframes | null;
-  protected options?: number | KeyframeAnimationOptions;
-
   protected start(): void {
-    this.mutationObserver = new MutationObserver((mutations: MutationRecord[]) => {
-      for (let i = 0; i < mutations.length; ++i) {
-        let mutation = mutations[i];
+    this.mutationObserver = new MutationObserver(this.observeMutations);
+    this.mutationObserver.observe(this.targetNode, this.mutationObserverOptions);
+  }
 
-        for (let j = 0; j < mutation.addedNodes.length; ++j) {
-          let addedNode = mutation.addedNodes[j];
+  protected observeMutations = (mutations: MutationRecord[]): void => {
+    for (let i = 0; i < mutations.length; ++i) {
+      let mutation = mutations[i];
 
-          if (addedNode instanceof HTMLElement) {
-            addedNode.animate(this.keyframes, this.options);
-          }
+      for (let j = 0; j < mutation.addedNodes.length; ++j) {
+        let addedNode = mutation.addedNodes[j];
+
+        if (addedNode instanceof HTMLElement) {
+          addedNode.animate(this.keyframes, this.options);
         }
       }
-    });
-
-    this.mutationObserver.observe(this.targetNode, {
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
+    }
   }
 
   public destroy(): void {
