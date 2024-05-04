@@ -133,42 +133,40 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
 
   private setupConfig(setupConfig?: ISetupConfig): void {
     if (setupConfig) {
-      if (setupConfig.animations) {
+      const { animations, styles, shadowDOM, devMode, setFadeInTransition } = setupConfig;
+
+      if (animations) {
         this.animationHandler = new AnimationHandler(this);
 
-        if (setupConfig.animations.setOpacityAnimation) {
+        if (animations.setOpacityAnimation) {
           this.animationHandler.setFadeAnimation();
         }
       }
 
-      if (setupConfig.styles) {
+      if (styles) {
         this.styles = new StyleHandler(this);
 
-        if (setupConfig.styles.adds) {
-          if (setupConfig.styles.adds.margins) {
-            this.styles.setupMargins();
+        if (styles.adds && styles.adds.margins) {
+          this.styles.setupMargins();
+        }
+
+        if (styles.links && styles.links.length >= 1) {
+          for (let i = 0; i < styles.links.length; ++i) {
+            let styleID = styles.links[i];
+            this.sharedState.setLinkToRoot(this, styleID);
           }
         }
 
-        if (setupConfig.styles.links) {
-          if (setupConfig.styles.links.length >= 1) {
-            for (let i = 0; i < setupConfig.styles.links.length; ++i) {
-              let styleID = setupConfig.styles.links[i];
-              this.sharedState.setLinkToRoot(this, styleID);
-            }
-          }
-        }
-
-        if (setupConfig.styles.css || setupConfig.styles.sass) {
+        if (styles.css || styles.sass) {
           this.$root.adoptedStyleSheets = [ this.styles.hostStylesheet ];
 
-          if (setupConfig.styles.css) {
-            this.styles.setupCSS(setupConfig.styles.css);
-          } else if (setupConfig.styles.sass) {
-            this.styles.setupSASS(setupConfig.styles.sass);
-          } else if (setupConfig.styles.css && setupConfig.styles.sass) {
-            this.styles.setupCSS(setupConfig.styles.css);
-            this.styles.setupSASS(setupConfig.styles.sass);
+          if (styles.css) {
+            this.styles.setupCSS(styles.css);
+          } else if (styles.sass) {
+            this.styles.setupSASS(styles.sass);
+          } else if (styles.css && styles.sass) {
+            this.styles.setupCSS(styles.css);
+            this.styles.setupSASS(styles.sass);
           }
 
           if (this.styles.cssStylesheet) {
@@ -181,18 +179,23 @@ export default class ReactiveElement extends HTMLElement implements ICustomEleme
         }
       }
 
-      if (setupConfig.shadowDOM) {
+      if (shadowDOM) {
         this.shadowDOM = new ShadowDOMHandler(this);
       }
 
-      if (setupConfig.devMode) {
+      if (devMode) {
         console.log("Dev mode is turned on...");
       }
 
-      if (setupConfig.setFadeInTransition && setupConfig.setFadeInTransition.value) {
-        this.fadeTransition = new FadeTransition(this.$root, setupConfig.setFadeInTransition.duration ?? 1000);
+      if (setFadeInTransition && setFadeInTransition.value) {
+        this.fadeTransition = new FadeTransition(this.$root, setFadeInTransition.duration ?? 1000);
       }
     }
+
+    this.stateHandler = new StateHandler(this);
+    this.stateHandler.setInitialState();
+
+    this.eventHandler = new EventHandler(this);
   }
 
   /**
