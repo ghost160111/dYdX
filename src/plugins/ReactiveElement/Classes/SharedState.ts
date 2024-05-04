@@ -20,7 +20,7 @@ export default class SharedState {
 
   /**
    * @description
-   * Most of the time, you won't need this method, because it is called automatically right in the base class (CustomHTMLElement)
+   * Most of the time, you won't need this method, because it is called automatically right in the base class (ReactiveElement)
    */
   public setComponent(context: ReactiveElement, name: string): void {
     Object.defineProperty(this.components, name, {

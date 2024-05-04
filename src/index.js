@@ -6,7 +6,26 @@ import StyleMargins from "./plugins/ReactiveElement/Utils/StyleMargins.ts";
 import Fonts from "./plugins/ReactiveElement/Utils/Fonts.ts";
 import { sharedState } from "./plugins/ReactiveElement/Classes/ReactiveElement.ts";
 
-const worker = new Worker("./WebWorker1.js");
+const jsCodeList = [
+  /*js*/`
+    self.addEventListener("message", (event) => {
+      console.log("Message received in worker: ", event.data);
+
+      if (event.data === "this") {
+        self.postMessage("Response from Web worker!");
+      }
+    });
+  `
+];
+
+const blob = new Blob(jsCodeList, { type: "text/javascript" });
+const url = URL.createObjectURL(blob);
+const script = document.createElement("script");
+
+script.src = url;
+document.head.appendChild(script);
+
+const worker = new Worker(url);
 
 worker.postMessage("this");
 worker.addEventListener("message", (event) => {

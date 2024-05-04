@@ -79,8 +79,8 @@ export default {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
-    main: "./index.js",
-    WebWorker1: "./WebWorker1.ts"
+    webworker: "./webworker.js",
+    main: "./index.js"
   },
   output: {
     filename: fileName("js"),

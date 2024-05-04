@@ -1,4 +1,4 @@
-self.addEventListener("message", (event: MessageEvent<string>): void => {
+self.addEventListener("message", (event) => {
   console.log("Message received in worker: ", event.data);
 
   if (event.data === "this") {

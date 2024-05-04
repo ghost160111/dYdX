@@ -1,6 +1,6 @@
 import { StringMethods } from "./StringMethods";
 
-let Fonts = /*css*/`
+let Fonts: string = /*css*/`
   .hero,
   .h-xlarge,
   .h-large,
