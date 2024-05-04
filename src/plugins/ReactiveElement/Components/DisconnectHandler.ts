@@ -69,6 +69,7 @@ export default class DisconnectHandler extends BaseComponent {
   }
 
   public logDestroyedObjects(): void {
+    console.group("Deleted instance objects and references: ");
     console.log("Emptied base component instance: ", this.context.base);
     console.log("Emptied styles component instance: ", this.context.styles);
     console.log("Emptied stylesheet component instance: ", this.context.stylesheet);
@@ -79,5 +80,6 @@ export default class DisconnectHandler extends BaseComponent {
     console.log("Emptied eventHandler instance: ", this.context.eventHandler);
     console.log("Emptied fadeTransition instance: ", this.context.fadeTransition);
     console.log("Destroyed object with ID: ", this.context.componentID);
+    console.groupEnd();
   }
 }
