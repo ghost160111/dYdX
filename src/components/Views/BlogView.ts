@@ -21,7 +21,7 @@ export default class BlogView extends ReactiveElement {
     });
   }
 
-  public components: Record<string, HTMLElement> = {
+  public components: Record<string, ReactiveElement> = {
     blogList: new BlogsList({
       blogsURL: "https://tree-project-api.vercel.app/data/dydx-blogs.json",
       filterBy: "Latest"

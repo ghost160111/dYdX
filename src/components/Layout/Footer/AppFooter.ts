@@ -43,11 +43,14 @@ export default class AppFooter extends ReactiveElement {
     });
   }
 
-  public components: Record<string, HTMLElement> = {
+  //#region FIELDS
+  public components: Record<string, ReactiveElement> = {
     "footer-apply-grant": new FooterApplyGrant(),
     "social-links": new SocialLinks()
   }
+  //#endregion
 
+  //#region METHODS
   public onConnected(): void {
     this.shadowDOM.setContentToNode(this.refs["footer-apply-grant"], this.components["footer-apply-grant"]);
     this.shadowDOM.setContentToNode(this.refs["footer-socials"], this.components["social-links"]);
@@ -62,4 +65,5 @@ export default class AppFooter extends ReactiveElement {
     const pathname = event.target.getAttribute("href");
     this.sharedState.components["header-navigation"].navigateTo(pathname);
   }
+  //#endregion
 }

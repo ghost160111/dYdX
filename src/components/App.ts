@@ -5,10 +5,13 @@ import AppMain from "./Layout/Main/AppMain";
 import ScrollTop from "./Global/ScrollTop";
 
 export default class App {
+  //#region FIELDS
   private root: HTMLElement;
   public reactiveApp: ReactiveApp;
   public components: Record<string, ComponentsOptions>;
+  //#endregion
 
+  //#region METHODS
   public main(): void {
     this.root = document.querySelector(".app-wrapper");
 
@@ -100,4 +103,5 @@ export default class App {
       app.style.background = "black";
     }, 3400);
   }
+  //#endregion
 }

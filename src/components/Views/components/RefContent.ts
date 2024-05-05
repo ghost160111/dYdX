@@ -3,7 +3,7 @@ import sass from "!css-loader!sass-loader!../styles/RefComponent.scss";
 import { ReactiveElement } from "../../../plugins/ReactiveElement/ReactiveElementLib";
 import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineComponent";
 
-interface IRefContentProps {
+export interface RefContentProps {
   hideLink?: boolean;
 }
 
@@ -24,7 +24,7 @@ interface IRefContentProps {
   `
 })
 export default class RefContent extends ReactiveElement {
-  constructor(props?: IRefContentProps) {
+  constructor(props?: RefContentProps) {
     super({
       shadowDOM: true,
       animations: {
@@ -37,6 +37,7 @@ export default class RefContent extends ReactiveElement {
     });
   }
 
+  //#region FIELDS
   public get routeTo(): string {
     return this.getAttribute("route-to");
   }
@@ -48,7 +49,9 @@ export default class RefContent extends ReactiveElement {
   public static get observedAttributes(): string[] {
     return ["route-to"];
   }
+  //#endregion
 
+  //#region METHODS
   public onConnected(): void {
     if (this.props && this.props["hideLink"]) {
       this.refs["link"].style.display = "none";
@@ -66,4 +69,5 @@ export default class RefContent extends ReactiveElement {
     let pathname = this.routeTo;
     this.sharedState.components["header-navigation"].navigateTo(pathname);
   }
+  //#endregion
 }

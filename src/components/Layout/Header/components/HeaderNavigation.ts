@@ -56,6 +56,7 @@ export default class HeaderNavigation extends ReactiveElement {
     this.compileRouter();
   }
 
+  //#region FIELDS
   public data: {} = {
     title: "Header Navigation",
     routeMatched: false,
@@ -65,12 +66,14 @@ export default class HeaderNavigation extends ReactiveElement {
   public routes: Routes = routes;
   public compiledRoutes: Routes;
 
-  public components: Record<string, HTMLElement> = {
+  public components: Record<string, ReactiveElement> = {
     socialLinks: new SocialLinks()
   }
+  //#endregion
 
+  //#region METHODS
   public onConnected(): void {
-    let handleRoutingRef = this.handleRouting.bind(this);
+    let handleRoutingRef: Function = this.handleRouting.bind(this);
     setTimeout(handleRoutingRef);
 
     this.shadowDOM.setContentToNode(this.refs["social-links"], this.components["socialLinks"]);
@@ -94,10 +97,9 @@ export default class HeaderNavigation extends ReactiveElement {
     }
   }
 
-  //#region ROUTING METHODS
   public preventDefaultHandler(event: any): void {
     event.preventDefault();
-    const pathname = event.target.getAttribute("href");
+    const pathname: string = event.target.getAttribute("href");
 
     if (window.location.pathname !== pathname) {
       this.navigateTo(pathname);
@@ -112,7 +114,7 @@ export default class HeaderNavigation extends ReactiveElement {
   }
 
   public compileRouter(): void {
-    const routes = this.routes;
+    const routes: Routes = this.routes;
     let compiledRoutes: Routes = {};
 
     const observerNestedRoutes = (oldPropKey: string, nestedRouteKey: string, nestedProps: Route) => {
@@ -163,10 +165,10 @@ export default class HeaderNavigation extends ReactiveElement {
   }
 
   public handleRouting(): void {
-    const pathname = window.location.pathname;
-    const mainWrapper = this.sharedState.components["app-main"].refs["main-wrapper"];
+    const pathname: string = window.location.pathname;
+    const mainWrapper: HTMLElement = this.sharedState.components["app-main"].refs["main-wrapper"];
     this.sharedState.root.scrollTo({ behavior: "smooth", left: 0, top: 0 });
-
+    this.animateTransform(mainWrapper);
     this.refProxy["routeMatched"] = false;
 
     for (let j = 0; j < this.refs["nav-items"].length; ++j) {
@@ -217,6 +219,19 @@ export default class HeaderNavigation extends ReactiveElement {
     this.refProxy["isMenuActive"] = false;
     this.refs["menu-toggle-btn"].classList.remove("menu-toggle-btn--active");
     this.refs["nav-list"].classList.remove("nav-list--active");
+  }
+
+  public animateTransform(target: HTMLElement | ReactiveElement): void {
+    target.animate(
+      [
+        { transform: "scale(0) translate(0, -10rem)" },
+        { transform: "scale(1) translate(0, 0)" }
+      ],
+      {
+        duration: 300,
+        easing: "ease"
+      }
+    );
   }
   //#endregion
 }

@@ -30,6 +30,7 @@ export default class FooterApplyGrant extends ReactiveElement {
     });
   }
 
+  //#region METHODS
   public events(): void {
     this.eventHandler.subscribe("ref-apply", "footer-apply-grant-ref", "click", this.moveToGrants);
   }
@@ -38,4 +39,5 @@ export default class FooterApplyGrant extends ReactiveElement {
     event.preventDefault();
     this.sharedState.components["header-navigation"].navigateTo("/apply-for-grant");
   }
+  //#endregion
 }

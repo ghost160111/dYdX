@@ -4,6 +4,9 @@ import { ReactiveElement } from "../../../plugins/ReactiveElement/ReactiveElemen
 import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineComponent";
 import PostCard, { IPostCard } from "./PostCard";
 
+export interface PostsSliderProps {
+}
+
 @DefineComponent({
   tag: "posts-slider",
   template: /*html*/`
@@ -14,7 +17,7 @@ import PostCard, { IPostCard } from "./PostCard";
   `
 })
 export default class PostsSlider extends ReactiveElement {
-  constructor() {
+  constructor(props?: PostsSliderProps) {
     super({
       shadowDOM: true,
       animations: {
@@ -22,10 +25,12 @@ export default class PostsSlider extends ReactiveElement {
       },
       styles: {
         sass
-      }
+      },
+      props
     });
   }
 
+  //#region FIELDS
   public data: {
     counter: number
     postCardList: IPostCard[],
@@ -37,7 +42,9 @@ export default class PostsSlider extends ReactiveElement {
     postsURL: "https://tree-project-api.vercel.app/data/dydx-posts.json",
     usersURL: "https://tree-project-api.vercel.app/data/dydx-users.json"
   }
+  //#endregion
 
+  //#region METHODS
   public onConnected(): void {
     this.renderPosts();
   }
@@ -109,4 +116,5 @@ export default class PostsSlider extends ReactiveElement {
     const json = await data.json();
     return await json;
   }
+  //#endregion
 }

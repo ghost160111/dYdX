@@ -30,11 +30,14 @@ export default class AppHeader extends ReactiveElement {
     });
   }
 
-  public components: Record<string, HTMLElement> = {
+  //#region FIELDS
+  public components: Record<string, ReactiveElement> = {
     headerLogo: new HeaderLogo(),
     headerNavigation: new HeaderNavigation()
   }
+  //#endregion
 
+  //#region METHODS
   public onConnected(): void {
     this.refs["navigation"].append(
       this.components["headerLogo"],
@@ -52,4 +55,5 @@ export default class AppHeader extends ReactiveElement {
       ? this.refs["header"].classList.remove("header--scrolled")
       : this.refs["header"].classList.add("header--scrolled");
   }
+  //#endregion
 }

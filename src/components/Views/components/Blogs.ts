@@ -58,6 +58,7 @@ export default class BlogsList extends ReactiveElement {
     });
   }
 
+  //#region FIELDS
   public props: BlogsListProps;
 
   public components: Record<string, ReactiveElement> = {
@@ -78,7 +79,9 @@ export default class BlogsList extends ReactiveElement {
     initialLoad: false,
     loadMoreBtnText: "Load more posts"
   }
+  //#endregion
 
+  //#region METHODS
   public onConnected(): void {
     this.refs["load-more-btn"].classList.add("hide");
 
@@ -234,4 +237,5 @@ export default class BlogsList extends ReactiveElement {
 
     this.shadowDOM.observeRefs();
   }
+  //#endregion
 }

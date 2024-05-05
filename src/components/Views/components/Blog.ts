@@ -51,6 +51,7 @@ export default class Blog extends ReactiveElement {
     this.data = props;
   }
 
+  //#region METHODS
   public data: {
     id: number,
     type: keyof BlogType,
@@ -58,4 +59,5 @@ export default class Blog extends ReactiveElement {
     title: string,
     datePosted: Date,
   };
+  //#endregion
 }

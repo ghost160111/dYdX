@@ -3,6 +3,9 @@ import sass from "!css-loader!sass-loader!../styles/FigureText.scss";
 import { ReactiveElement } from "../../../plugins/ReactiveElement/ReactiveElementLib";
 import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineComponent";
 
+export interface FigureTextProps {
+}
+
 @DefineComponent({
   tag: "figure-text",
   template: /*html*/`
@@ -13,7 +16,7 @@ import DefineComponent from "../../../plugins/ReactiveElement/Decorators/DefineC
   `
 })
 export default class FigureText extends ReactiveElement {
-  constructor() {
+  constructor(props?: FigureTextProps) {
     super({
       shadowDOM: true,
       animations: {
@@ -21,10 +24,12 @@ export default class FigureText extends ReactiveElement {
       },
       styles: {
         sass
-      }
+      },
+      props
     });
   }
 
+  //#region METHODS
   public onConnected(): void {
     let slots = this.querySelectorAll("[slot]");
 
@@ -38,4 +43,5 @@ export default class FigureText extends ReactiveElement {
       }
     }
   }
+  //#endregion
 }

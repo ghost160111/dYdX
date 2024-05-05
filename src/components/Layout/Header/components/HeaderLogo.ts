@@ -33,6 +33,7 @@ export default class HeaderLogo extends ReactiveElement {
     });
   }
 
+  //#region METHODS
   public events(): void {
     this.eventHandler.subscribe("logo", "home-navigate", "click", this.preventDefault);
   }
@@ -41,4 +42,5 @@ export default class HeaderLogo extends ReactiveElement {
     event.preventDefault();
     this.sharedState.components["header-navigation"].navigateTo("/");
   }
+  //#endregion
 }

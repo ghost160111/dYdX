@@ -16,6 +16,9 @@ export interface IPostCard {
   teamUsernames: string[]
 }
 
+export interface PostCardProps {
+}
+
 @DefineComponent({
   tag: "post-card",
   template: /*html*/`
@@ -42,7 +45,7 @@ export interface IPostCard {
   `
 })
 export default class PostCard extends ReactiveElement {
-  constructor() {
+  constructor(props?: PostCardProps) {
     super({
       shadowDOM: true,
       animations: {
@@ -50,7 +53,8 @@ export default class PostCard extends ReactiveElement {
       },
       styles: {
         sass
-      }
+      },
+      props
     });
   }
 }
