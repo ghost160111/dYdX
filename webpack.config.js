@@ -79,7 +79,6 @@ export default {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
-    webworker: "./webworker.js",
     main: "./index.js"
   },
   output: {
